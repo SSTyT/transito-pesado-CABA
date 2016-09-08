@@ -1,3 +1,9 @@
+@import "../../app.scss";
+
 .home {
-  color: red;
+    height: 100vh;
+    .content {
+        background-color: $darkBgColor;
+        height: 100%;
+    }
 }

@@ -13,6 +13,9 @@ module.exports = {
        { test: /\.css$/, loader: 'style!css' }
     ]
   },
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "./client/app/variables.scss")]
+  },
   plugins: [
     // Injects bundles in your index.html instead of wiring all manually.
     // It also adds hash to all injected assets so we don't have problems

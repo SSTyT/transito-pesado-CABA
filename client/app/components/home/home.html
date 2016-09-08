@@ -1,9 +1,16 @@
-<navbar></navbar>
-<header>
-  <hero></hero>
-</header>
-<main>
-  <div>
-    <h1>Found in {{ $ctrl.name }}.html</h1>
-  </div>
-</main>
+<div class="home" layout="column">
+  <md-toolbar>
+
+    <div class="md-toolbar-tools">
+      <span>Transito Pesado en CABA</span>
+
+      <!-- fill up the space between left and right area -->
+      <span flex></span>
+
+    </div>
+
+  </md-toolbar>
+  <md-content class="content">
+    <map map-id="map"></map>
+  </md-content>
+</div>
