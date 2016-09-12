@@ -1,16 +1,12 @@
 <div class="home" layout="column">
-  <md-toolbar>
-
-    <div class="md-toolbar-tools">
-      <span>Transito Pesado en CABA</span>
-
-      <!-- fill up the space between left and right area -->
-      <span flex></span>
-
-    </div>
-
-  </md-toolbar>
-  <md-content class="content">
-    <map map-id="map"></map>
-  </md-content>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span>Transito Pesado en CABA</span>
+            <!-- fill up the space between left and right area -->
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-content class="content">
+        <map options="$ctrl.mapOpts" class="main-map"></map>
+    </md-content>
 </div>

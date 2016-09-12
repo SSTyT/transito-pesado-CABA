@@ -7,8 +7,18 @@ class MapController {
 
   $postLink() {
     this.timeout(() => {
-      L.map(this.mapId).setView([51.505, -0.09], 13);
-    })
+      const opts = this.options;
+
+      const center = [opts.lat, opts.long];
+
+      this.map = L.map(opts.mapId).setView(center, opts.zoom);
+
+      L.tileLayer(opts.url, {
+        attribution: opts.attribution,
+        minZoom: opts.minZoom,
+        maxZoom: opts.maxZoom
+      }).addTo(this.map);
+    });
   }
 }
 

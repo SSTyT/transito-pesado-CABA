@@ -4,6 +4,11 @@
     height: 100vh;
     .content {
         background-color: $darkBgColor;
-        height: 100%;
+        height: inherit;
+    }
+
+    .main-map {
+    	height: 100%;
+    	width: 100%;
     }
 }
