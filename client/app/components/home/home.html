@@ -7,6 +7,6 @@
         </div>
     </md-toolbar>
     <md-content class="content">
-        <map options="$ctrl.mapOpts" class="main-map"></map>
+        <map options="$ctrl.mapOpts" map-control="$ctrl.mapControl" on-load="$ctrl.mapReady()" class="main-map"></map>
     </md-content>
 </div>

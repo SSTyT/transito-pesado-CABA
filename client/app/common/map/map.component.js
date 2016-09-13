@@ -8,7 +8,9 @@ import 'leaflet/dist/leaflet.css';
 let mapComponent = {
   restrict: 'E',
   bindings: {
-  	options: '<'
+    options: '<',
+    mapControl: '=',
+    onLoad: '&'
   },
   template,
   controller

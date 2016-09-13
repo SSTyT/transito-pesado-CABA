@@ -11,7 +11,8 @@ module.exports = {
        { test: /\.html$/, loader: 'raw' },
        { test: /\.scss$/, loader: 'style!css!resolve-url!sass' },
        { test: /\.css$/, loader: 'style!css!resolve-url' },
-       { test: /\.png$/, loader: 'raw' }
+       { test: /\.png$/, loader: 'raw' },
+       { test: /\.json$/, loader: 'json' }
     ]
   },
   sassLoader: {

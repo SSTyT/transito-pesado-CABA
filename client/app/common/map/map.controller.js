@@ -1,8 +1,13 @@
 import L from 'leaflet';
 
+L.Icon.Default.imagePath = 'leaflet/dist/images';
+
 class MapController {
   constructor($timeout) {
     this.timeout = $timeout;
+
+    this.mapControl.addMarker = this.addMarker.bind(this);
+    this.mapControl.addPolyline = this.addPolyline.bind(this);
   }
 
   $postLink() {
@@ -18,7 +23,19 @@ class MapController {
         minZoom: opts.minZoom,
         maxZoom: opts.maxZoom
       }).addTo(this.map);
+
+      console.log(this);
+      this.onLoad();
     });
+  }
+
+  addMarker(lat, lng) {
+    console.log(this);
+    L.circleMarker([lat, lng], {}).setRadius(5).addTo(this.map);
+  }
+
+  addPolyline() {
+
   }
 }
 
