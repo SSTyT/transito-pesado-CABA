@@ -1,6 +1,7 @@
 import trayectoria from './tray.json';
+import io from 'socket.io-client';
 
-console.log(trayectoria);
+const socket = io('http://sstyt.ddns.net');
 
 class HomeController {
   constructor() {
@@ -15,11 +16,20 @@ class HomeController {
       minZoom: 0,
       maxZoom: 18
     };
+    this.trucks = {};
   }
 
   mapReady() {
-    trayectoria.forEach((point) => {
+    /*trayectoria.forEach((point) => {
       this.mapControl.addMarker(point.latitude, point.longitude);
+    });*/
+    socket.on('report', (report) => {
+      if (this.trucks[report.encrypt_plate_id]) {
+        this.trucks[report.encrypt_plate_id] = {...report, marker: this.trucks[report.encrypt_plate_id].marker.setLatLng([report.latitude, report.longitude]) };
+      } else {
+        this.trucks[report.encrypt_plate_id] = {...report, marker: this.mapControl.addMarker(report.latitude, report.longitude) };
+      }
+      console.log(report);
     });
   }
 }
