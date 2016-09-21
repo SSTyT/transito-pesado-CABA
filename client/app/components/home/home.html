@@ -7,6 +7,11 @@
         </div>
     </md-toolbar>
     <md-content class="content">
-        <map options="$ctrl.mapOpts" map-control="$ctrl.mapControl" on-load="$ctrl.mapReady()" class="main-map"></map>
+        <section class="main" layout="row" flex>
+            <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+                <side-menu></side-menu>
+            </md-sidenav>
+            <map options="$ctrl.mapOpts" map-control="$ctrl.mapControl" on-load="$ctrl.mapReady()" class="main-map"></map>
+        </section>
     </md-content>
 </div>

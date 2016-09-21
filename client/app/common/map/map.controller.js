@@ -30,8 +30,7 @@ class MapController {
   }
 
   addMarker(lat, lng) {
-    console.log(this);
-    return L.circleMarker([lat, lng], {}).setRadius(5).addTo(this.map);
+    return L.circleMarker([lat, lng], {}).setRadius(4).addTo(this.map);
   }
 
   addPolyline() {

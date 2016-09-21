@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 const socket = io('http://sstyt.ddns.net');
 
 class HomeController {
-  constructor() {
+  constructor(measured) {
     this.mapControl = {};
     this.mapOpts = {
       mapId: 'map',
@@ -17,6 +17,7 @@ class HomeController {
       maxZoom: 18
     };
     this.trucks = {};
+    this.metrics = measured.getCollection('reports');
   }
 
   mapReady() {
@@ -29,9 +30,9 @@ class HomeController {
       } else {
         this.trucks[report.encrypt_plate_id] = {...report, marker: this.mapControl.addMarker(report.latitude, report.longitude) };
       }
-      console.log(report);
+      this.metrics.meter('requestsPerSecond').mark();
     });
   }
 }
 
-export default HomeController;
+export default ['measured', HomeController];

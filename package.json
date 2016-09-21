@@ -10,6 +10,7 @@
     "angular-material": "^1.1.1",
     "angular-ui-router": "^1.0.0-beta.1",
     "leaflet": "^1.0.0-rc.3",
+    "measured": "^1.1.0",
     "normalize.css": "^3.0.3",
     "socket.io-client": "^1.4.8"
   },
