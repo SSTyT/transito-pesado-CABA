@@ -8,11 +8,11 @@ module.exports = {
   module: {
     loaders: [
        { test: /\.js$/, exclude: [/app\/lib/, /node_modules/], loader: 'ng-annotate!babel' },
-       { test: /\.html$/, loader: 'raw' },
+       { test: /\.(html|png)$/, loader: 'raw' },
        { test: /\.scss$/, loader: 'style!css!resolve-url!sass' },
        { test: /\.css$/, loader: 'style!css!resolve-url' },
-       { test: /\.png$/, loader: 'raw' },
-       { test: /\.json$/, loader: 'json' }
+       { test: /\.json$/, loader: 'json' },
+       { test: /\.(svg|woff|woff2|ttf|eot)$/, loader: 'file?name=[name].[hash].[ext]' }
     ]
   },
   sassLoader: {

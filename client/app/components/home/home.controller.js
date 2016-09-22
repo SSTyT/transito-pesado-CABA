@@ -3,6 +3,24 @@ import io from 'socket.io-client';
 
 const socket = io('http://sstyt.ddns.net');
 
+const colorScales = [ //TODO mover a servicio de colores material
+  '#B71C1C',
+  '#F44336',
+  '#F9A825',
+  '#FDD835',
+  '#8BC34A',
+  '#64DD17'
+];
+
+function speedColor(speed) {
+  //speed va de 0 a 59
+  if (speed > 59) { speed = 59 };
+  if (speed < 0) { speed = 0 };
+
+  return colorScales[Math.floor(speed / 10)];
+
+}
+
 class HomeController {
   constructor(measured) {
     this.mapControl = {};
@@ -16,21 +34,35 @@ class HomeController {
       minZoom: 0,
       maxZoom: 18
     };
-    this.trucks = {};
+    this.vehicles = {};
     this.metrics = measured.getCollection('reports');
   }
 
   mapReady() {
     /*trayectoria.forEach((point) => {
-      this.mapControl.addMarker(point.latitude, point.longitude);
+      this.mapControl.addCircleMarker(point.latitude, point.longitude);
     });*/
+
+    this.mapControl.addCluster('vehicles', { disableClusteringAtZoom: 13 });
+
     socket.on('report', (report) => {
-      if (this.trucks[report.encrypt_plate_id]) {
-        this.trucks[report.encrypt_plate_id] = {...report, marker: this.trucks[report.encrypt_plate_id].marker.setLatLng([report.latitude, report.longitude]) };
+
+      var markerOpts = {
+        iconSize: [18, 18],
+        className: 'nav-marker',
+        html: `<md-icon class="material-icons md-light md-18" style="color:${speedColor(report.speed)}; transform:rotate(${report.head}deg)">navigation</md-icon>`
+      };
+
+      if (this.vehicles[report.encrypt_plate_id]) {
+        this.vehicles[report.encrypt_plate_id] = {...report, marker: this.vehicles[report.encrypt_plate_id].marker };
+        this.vehicles[report.encrypt_plate_id].marker.setLatLng([report.latitude, report.longitude]);
+        this.vehicles[report.encrypt_plate_id].marker.setIcon(this.mapControl.divIcon(markerOpts));
       } else {
-        this.trucks[report.encrypt_plate_id] = {...report, marker: this.mapControl.addMarker(report.latitude, report.longitude) };
+        this.vehicles[report.encrypt_plate_id] = {...report, marker: this.mapControl.addDivMarker(report.latitude, report.longitude, markerOpts, 'vehicles') };
+        this.metrics.counter('vehicles').inc();
       }
       this.metrics.meter('requestsPerSecond').mark();
+      this.metrics.meter('requestsPerMinute', { rateUnit: 60000 }).mark();
     });
   }
 }

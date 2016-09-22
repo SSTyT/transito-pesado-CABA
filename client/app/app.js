@@ -9,6 +9,7 @@ import Components from './components/components';
 import AppComponent from './app.component';
 import 'normalize.css';
 import 'angular-material/angular-material.css';
+import 'material-design-icons/iconfont/material-icons.css';
 
 angular.module('app', [
     uiRouter,

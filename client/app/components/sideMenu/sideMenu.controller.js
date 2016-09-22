@@ -3,6 +3,7 @@ class SideMenuController {
     this.name = 'sideMenu';
     $interval(() => {
       this.metrics = measured.getCollection('reports').toJSON();
+      console.log(this.metrics);
     }, 5000);
   }
 }

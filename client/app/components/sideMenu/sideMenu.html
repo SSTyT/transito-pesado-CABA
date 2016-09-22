@@ -1,3 +1,31 @@
-<div>
-    <p>{{ $ctrl.metrics }}</p>
-</div>
+<md-content class="side-menu">
+    <md-list>
+        <md-list-item class="md-3-line">
+            <div class="md-list-item-text">
+                <h3>Cantidad de vehiculos</h3>
+                <p>{{$ctrl.metrics.vehicles}}</p>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+        <md-list-item class="md-3-line">
+            <div class="md-list-item-text">
+                <h3>Reportes por segundo</h3>
+                <h4>Promedio total</h4>
+                <p>{{$ctrl.metrics.requestsPerSecond.mean}}</p>
+                <h4>Promedio en los últimos 5 minutos</h4>
+                <p>{{$ctrl.metrics.requestsPerSecond["5MinuteRate"]}}</p>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+        <md-list-item class="md-3-line">
+            <div class="md-list-item-text">
+                <h3>Reportes por minuto</h3>
+                <h4>Promedio total</h4>
+                <p>{{$ctrl.metrics.requestsPerMinute.mean}}</p>
+                <h4>Promedio en los últimos 5 minutos</h4>
+                <p>{{$ctrl.metrics.requestsPerMinute["5MinuteRate"]}}</p>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>
