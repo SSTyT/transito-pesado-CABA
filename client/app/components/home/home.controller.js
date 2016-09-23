@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 const socket = io('http://sstyt.ddns.net');
 
 const colorScales = [ //TODO mover a servicio de colores material
+  '#1e88e5',
   '#B71C1C',
   '#F44336',
   '#F9A825',
@@ -17,8 +18,11 @@ function speedColor(speed) {
   if (speed > 59) { speed = 59 };
   if (speed < 0) { speed = 0 };
 
-  return colorScales[Math.floor(speed / 10)];
-
+  if (speed == 0) {
+    return colorScales[0];
+  } else {
+    return colorScales[Math.floor(speed / 10) + 1];
+  }
 }
 
 class HomeController {

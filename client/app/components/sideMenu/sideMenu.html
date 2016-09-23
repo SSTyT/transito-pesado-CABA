@@ -1,5 +1,16 @@
 <md-content class="side-menu">
-    <md-list>
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Metricas</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Favorite" ng-click="$ctrl.showMetrics = !$ctrl.showMetrics">
+                <md-icon class="material-icons md-light md-18">keyboard_arrow_down</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-list class="sm-list" ng-show="$ctrl.showMetrics" aria-hidden="true">
         <md-list-item class="md-3-line">
             <div class="md-list-item-text">
                 <h3>Cantidad de vehiculos</h3>
