@@ -13,6 +13,8 @@ import 'material-design-icons/iconfont/material-icons.css';
 
 angular.module('app', [
     uiRouter,
+    angularAnimate,
+    angularAria,
     angularMaterial,
     Common,
     Components

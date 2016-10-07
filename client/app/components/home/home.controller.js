@@ -40,6 +40,7 @@ class HomeController {
     };
     this.vehicles = {};
     this.metrics = measured.getCollection('reports');
+    this.vehiclesMetrics = measured.getCollection('vehicles');
   }
 
   mapReady() {
@@ -61,9 +62,11 @@ class HomeController {
         this.vehicles[report.encrypt_plate_id] = {...report, marker: this.vehicles[report.encrypt_plate_id].marker };
         this.vehicles[report.encrypt_plate_id].marker.setLatLng([report.latitude, report.longitude]);
         this.vehicles[report.encrypt_plate_id].marker.setIcon(this.mapControl.divIcon(markerOpts));
+        this.vehiclesMetrics.meter(report.encrypt_plate_id).mark();
       } else {
         this.vehicles[report.encrypt_plate_id] = {...report, marker: this.mapControl.addDivMarker(report.latitude, report.longitude, markerOpts, 'vehicles') };
         this.metrics.counter('vehicles').inc();
+        this.vehiclesMetrics.meter(report.encrypt_plate_id, { rateUnit: 60000 }).mark();
       }
       this.metrics.meter('requestsPerSecond').mark();
       this.metrics.meter('requestsPerMinute', { rateUnit: 60000 }).mark();

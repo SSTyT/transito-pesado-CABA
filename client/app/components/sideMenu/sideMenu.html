@@ -1,11 +1,11 @@
 <md-content class="side-menu">
-    <md-toolbar class="md-hue-2">
+    <md-toolbar class="sm-toolbar md-hue-2">
         <div class="md-toolbar-tools">
             <h2>
                 <span>Metricas</span>
             </h2>
             <span flex></span>
-            <md-button class="md-icon-button" aria-label="Favorite" ng-click="$ctrl.showMetrics = !$ctrl.showMetrics">
+            <md-button class="md-icon-button" ng-class="{'toggled' : $ctrl.showMetrics}" ng-click="$ctrl.showMetrics = !$ctrl.showMetrics">
                 <md-icon class="material-icons md-light md-18">keyboard_arrow_down</md-icon>
             </md-button>
         </div>
@@ -39,4 +39,39 @@
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
+    <md-toolbar class="sm-toolbar md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Test</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-class="{'toggled' : $ctrl.showTest}" ng-click="$ctrl.showTest = !$ctrl.showTest">
+                <md-icon class="material-icons md-light md-18">keyboard_arrow_down</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-list class="sm-list" ng-show="$ctrl.showTest" aria-hidden="true">
+        <md-list-item class="md-2-line" ng-repeat="vehicle in $ctrl.means">
+            <div class="md-list-item-text">
+                <h3>{{vehicle}}</h3>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
+    <!--md-toolbar class="sm-toolbar md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Opciones</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-class="{'toggled' : $ctrl.showOptions}" ng-click="$ctrl.showOptions = !$ctrl.showOptions">
+                <md-icon class="material-icons md-light md-18">keyboard_arrow_down</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content class="sm-options" ng-show="$ctrl.showOptions" aria-hidden="true">
+            <md-switch class="md-primary switch" md-no-ink aria-label="Switch No Ink" ng-model="$ctrl.options.showStop">
+                Mostrar detenidos
+            </md-switch>
+    </md-content-->
 </md-content>
