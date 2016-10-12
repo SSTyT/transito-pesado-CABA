@@ -1,0 +1,20 @@
+<div class="trucks" layout="column">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button ng-show="$mdMedia('gt-md')" class="md-icon-button" aria-label="SideMenu">
+                <md-icon class="material-icons md-light md-18">menu</md-icon>
+            </md-button>
+            <span>Transito Pesado</span>
+            <!-- fill up the space between left and right area -->
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-content class="content">
+        <section class="main" layout="row" flex>
+            <!--md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+                <side-menu></side-menu>
+            </md-sidenav-->
+            <map options="$ctrl.mapOpts" map-control="$ctrl.mapControl" on-load="$ctrl.mapReady()" class="truck-map"></map>
+        </section>
+    </md-content>
+</div>
