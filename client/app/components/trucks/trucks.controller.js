@@ -1,6 +1,5 @@
-//import puntos from './puntos.csv';
+import vehiculos from './out.json';
 
-//console.log(puntos);
 
 class TrucksController {
   constructor() {
@@ -17,8 +16,13 @@ class TrucksController {
     };
   }
 
-  mapReady(){
-  	
+  mapReady() {
+    vehiculos.forEach((vehiculo) => {
+      vehiculo.points.forEach((point) => {
+        this.mapControl.addCircleMarker(point.lat, point.long);
+      });
+    });
+
   }
 }
 
