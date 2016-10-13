@@ -1,5 +1,5 @@
+import randomColor from 'randomcolor';
 import vehiculos from './out.json';
-
 
 class TrucksController {
   constructor() {
@@ -17,9 +17,14 @@ class TrucksController {
   }
 
   mapReady() {
-    vehiculos.forEach((vehiculo) => {
+    var colors = randomColor({ luminosity: 'dark', count: vehiculos.length });
+    vehiculos.forEach((vehiculo, i) => {
       vehiculo.points.forEach((point) => {
-        this.mapControl.addCircleMarker(point.lat, point.long);
+        this.mapControl.addCircleMarker(point.lat, point.long, { color: colors[i] }).bindPopup(`<ul>
+          <li>Id: ${vehiculo.plate}</li>
+          <li>Velocidad: ${point.speed}</li>
+          <li>Fecha y hora: ${point.time}</li>
+          </ul>`);;
       });
     });
 

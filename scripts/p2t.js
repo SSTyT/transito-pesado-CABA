@@ -1,6 +1,19 @@
 var fs = require('fs');
 var csv = require('csv');
 var moment = require('moment');
+var turf = require('@turf/turf');
+
+
+function point2GeoJSon(lat, long) {
+  return {
+    "type": "Feature",
+    "properties": {},
+    "geometry": {
+      "type": "Point",
+      "coordinates": [long, lat]
+    }
+  };
+}
 
 function transform(data) {
   var out = [];
@@ -12,11 +25,15 @@ function transform(data) {
 
       if (j >= 0) {
         var avgLag = 0;
+        var distance = 0;
         out[j].points.forEach(function(point) {
           avgLag += point.lag;
+          distance += point.distance;
         });
 
         out[j].avgLag = avgLag / (out[j].count - 1);
+        out[j].avgDistance = distance / (out[j].count - 1);
+        out[j].distance = distance;
       }
 
       current = data[i][0];
@@ -29,10 +46,13 @@ function transform(data) {
     }
 
     var lag;
+    var distance;
     if (out[j].points.length === 0) {
       lag = 0;
+      distance = 0;
     } else {
-      lag = moment(data[i][3].replace(/-03$/, '')) - moment(out[j].points[out[j].points.length - 1].time);
+      lag = moment(data[i][3], 'YYYY-MM-DD HH:mm:ss') - moment(out[j].points[out[j].points.length - 1].time, 'YYYY-MM-DD HH:mm:ss');
+      distance = turf.distance(point2GeoJSon(data[i][2], data[i][1]), point2GeoJSon(out[j].points[out[j].points.length - 1].long, out[j].points[out[j].points.length - 1].lat));
     }
 
     out[j].points.push({
@@ -40,8 +60,9 @@ function transform(data) {
       long: data[i][2],
       speed: data[i][4],
       head: data[i][5],
-      time: data[i][3].replace(/-03$/, ''),
-      lag: lag
+      time: data[i][3],
+      lag: lag,
+      distance: distance
     });
 
     out[j].count++;
@@ -61,18 +82,23 @@ var parser = csv.parse({ delimiter: ';' }, (error, data) => {
     });
 
     var out = [];
-    var n = 500;
+    var n = 50;
     var i = 0;
-    var minpoints = 60;
-    while (i < n) {
+    var j = 0
+    var minpoints = 50;
+    var mindistance = 10;
+    var minAvgDistance = 0.010
+    while (j < n) {
       if (i >= tx.length) {
         break;
       }
 
-      if (tx[i].count >= minpoints) {
+      /*if (tx[i].count >= minpoints && tx[i].distance >= mindistance && tx[i].avgDistance >= minAvgDistance) {
         out.push(tx[i]);
-      }
-
+        j++;
+        console.log("asd");
+      }*/
+      out.push(tx[i]);
       i++;
     }
 

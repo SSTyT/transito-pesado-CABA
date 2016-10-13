@@ -37,8 +37,9 @@ class MapController {
     });
   }
 
-  addCircleMarker(lat, lng, radius = 4, cluster) {
-    return L.circleMarker([lat, lng], {}).setRadius(radius).addTo(this._defineLayer(cluster));
+  addCircleMarker(lat, lng, opts = {}, radius = 4, cluster) {
+    console.log(opts);
+    return L.circleMarker([lat, lng], opts).setRadius(radius).addTo(this._defineLayer(cluster));
   }
 
   addDivMarker(lat, lng, options, cluster) {
