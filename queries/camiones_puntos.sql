@@ -1,7 +1,7 @@
 SELECT camiones.encrypt_plate_id, reports.latitude, reports.longitude, reports.loc_time, reports.speed, reports.head
 FROM camiones
   INNER JOIN reports USING (encrypt_plate_id)
-Where Where ST_Intersects(reports.geom,st_setsrid(
+Where ST_Intersects(reports.geom,st_setsrid(
         ST_geomfromgeojson('{
   "type": "Polygon",
   "coordinates": [

@@ -1,5 +1,5 @@
 import randomColor from 'randomcolor';
-import vehiculos from './out.json';
+import vehiculos from './bus.json';
 
 class TrucksController {
   constructor() {
